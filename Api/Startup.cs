@@ -1,14 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CrudOperation.Core.Abstruct.Base;
+using CrudOperation.Data.Base;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Api
 {
@@ -21,13 +19,26 @@ namespace Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // configure db
+            services.AddDbContextPool<DataContext>(opt => opt.UseSqlServer(Environment.GetEnvironmentVariable("CrudConnection")), poolSize: 25);
+
+            // configure DI
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AppCorsPolicy", builder =>
+                {
+                    var origins = Configuration.GetValue<string>("AllowedOrigins").Split(";");
+                    builder.WithOrigins(origins).AllowAnyMethod().AllowAnyHeader();
+                });
+            });
+
             services.AddControllers();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -36,8 +47,7 @@ namespace Api
             }
 
             app.UseRouting();
-
-            app.UseAuthorization();
+            app.UseCors("AppCorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {
