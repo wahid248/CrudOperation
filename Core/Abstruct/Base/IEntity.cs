@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace CrudOperation.Core.Abstruct.Base
+namespace Core.Abstruct.Base
 {
     public interface IEntity<T> : IValidatableObject
     {

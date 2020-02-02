@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace CrudOperation.Core.Abstruct.Base
+namespace Core.Abstruct.Base
 {
     public interface IRepository<TEntity, T> where TEntity : class, IEntity<T>, new()
     {

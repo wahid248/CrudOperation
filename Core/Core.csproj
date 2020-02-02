@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Abstruct\Repositories\" />
-    <Folder Include="Entities\" />
   </ItemGroup>
 
 </Project>

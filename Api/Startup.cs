@@ -1,11 +1,13 @@
 using System;
-using CrudOperation.Core.Abstruct.Base;
-using CrudOperation.Data.Base;
+using System.IO;
+using Core.Abstruct.Base;
+using Data.Base;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
 namespace Api
@@ -22,7 +24,7 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             // configure db
-            services.AddDbContextPool<DataContext>(opt => opt.UseSqlServer(Environment.GetEnvironmentVariable("CrudConnection")), poolSize: 25);
+            services.AddDbContextPool<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("CODB")), poolSize: 25);
 
             // configure DI
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -48,6 +50,12 @@ namespace Api
 
             app.UseRouting();
             app.UseCors("AppCorsPolicy");
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "Files")),
+                RequestPath = "/files"
+            });
 
             app.UseEndpoints(endpoints =>
             {

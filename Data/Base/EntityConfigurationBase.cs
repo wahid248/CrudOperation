@@ -1,8 +1,8 @@
-﻿using CrudOperation.Core.Abstruct.Base;
+﻿using Core.Abstruct.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CrudOperation.Data.Base
+namespace Data.Base
 {
     public class EntityConfigurationBase<TEntity, T> : IEntityTypeConfiguration<TEntity> where TEntity : class, IEntity<T>
     {

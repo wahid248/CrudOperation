@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CrudOperation.Core.Abstruct.Base;
+using Core.Abstruct.Base;
+using Core.Abstruct.Repositories;
+using Data.Repositories;
 
-namespace CrudOperation.Data.Base
+namespace Data.Base
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -39,5 +41,7 @@ namespace CrudOperation.Data.Base
         {
             await context.SaveChangesAsync();
         }
+
+        public IPlanRepository PlanRepository => new PlanRepository(context);
     }
 }

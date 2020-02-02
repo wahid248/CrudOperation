@@ -1,4 +1,4 @@
-﻿using CrudOperation.Core.Abstruct.Base;
+﻿using Core.Abstruct.Base;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace CrudOperation.Data.Base
+namespace Data.Base
 {
     public class Repository<TEntity, T> : IRepository<TEntity, T> where TEntity : class, IEntity<T>, new()
     {

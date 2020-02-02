@@ -1,7 +1,7 @@
-﻿using CrudOperation.Data.Configuration;
+﻿using Data.Configuration;
 using Microsoft.EntityFrameworkCore;
 
-namespace CrudOperation.Data.Base
+namespace Data.Base
 {
     public class DataContext : DbContext
     {
