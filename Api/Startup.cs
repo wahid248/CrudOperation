@@ -24,7 +24,7 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             // configure db
-            services.AddDbContextPool<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("CODB")), poolSize: 25);
+            services.AddDbContextPool<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), poolSize: 25);
 
             // configure DI
             services.AddScoped<IUnitOfWork, UnitOfWork>();
