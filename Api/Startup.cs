@@ -50,12 +50,7 @@ namespace Api
 
             app.UseRouting();
             app.UseCors("AppCorsPolicy");
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), "Files")),
-                RequestPath = "/files"
-            });
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {
