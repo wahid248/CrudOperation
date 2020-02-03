@@ -1,8 +1,11 @@
+import { PlanService } from './../common/services/plan.service';
+import { Plan } from './../common/models/plan';
 import { DataShareService } from './../common/services/data-share.service';
 import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { fadeIn } from './../ui/animations';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-insert-data',
@@ -19,6 +22,8 @@ export class InsertDataComponent implements OnInit {
   constructor(
     private builder: FormBuilder,
     private titleService: Title,
+    private service: PlanService,
+    private snackBar: MatSnackBar,
     private dataShareService: DataShareService) {
 
     this.isSubmitting = false;
@@ -35,14 +40,61 @@ export class InsertDataComponent implements OnInit {
       devOfficer: ['', Validators.required],
       manager: ['', Validators.required],
       syllabusFile: [''],
-      testPlanFile: ['']
+      testPlanFile: [''],
+      activeDate: ['', Validators.required],
+      language: ['']
     });
+  }
+
+  onLanguageChange(event){
+    if(event.checked){
+      if(this.form.get('language').value == ''){
+        this.form.get('language').patchValue(`${event.source.value}`);
+      }
+      else{
+        this.form.get('language').patchValue(`${this.form.get('language').value}, ${event.source.value}`);
+      }
+    }
+    else{
+      this.form.get('language').patchValue(this.form.get('language').value.replace(`, ${event.source.value}`, '').replace(event.source.value, ''));
+    }
   }
 
   onSubmit(): void {
     if (this.form.valid && !this.isSubmitting) {
-      //this.isSubmitting = true;
+      this.isSubmitting = true;
+      let formData = new FormData();
       
+      formData.append('Trade', this.form.get('trade').value);
+      formData.append('Level', this.form.get('level').value);
+      formData.append('Language', this.form.get('language').value);
+      formData.append('SyllabusName', this.form.get('syllabusName').value);
+      formData.append('DevOfficer', this.form.get('devOfficer').value);
+      formData.append('Manager', this.form.get('manager').value);
+      formData.append('ActiveDate', this.form.get('activeDate').value);
+
+      this.service.savePlan(formData).subscribe(
+        result => {
+          // result is null because of cors
+          this.snackBar.open("Data saved successfully", '', {
+            duration: this.durationInSeconds,
+            horizontalPosition: "end",
+            verticalPosition: "top",
+            panelClass: ['snackbar-success']
+          });
+          this.isSubmitting = false;
+        },
+        error => {
+          this.snackBar.open(error, '', {
+            duration: this.durationInSeconds,
+            horizontalPosition: "end",
+            verticalPosition: "top",
+            panelClass: ['snackbar-error']
+          });
+          console.error(error);
+          this.isSubmitting = false;
+        }
+      );
     }
   }
 }

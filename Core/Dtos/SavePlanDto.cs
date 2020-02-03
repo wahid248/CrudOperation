@@ -12,8 +12,8 @@ namespace Core.Dtos
         [Required] public string Level { get; set; }
         [Required] public string Language { get; set; }
         [Required] public string SyllabusName { get; set; }
-        public IFormFile SyllabusFile { get; set; }
-        public IFormFile TestPlanFile { get; set; }
+        //public IFormFile SyllabusFile { get; set; }
+        //public IFormFile TestPlanFile { get; set; }
         [Required] public string DevOfficer { get; set; }
         [Required] public string Manager { get; set; }
         [Required] public DateTime ActiveDate { get; set; }

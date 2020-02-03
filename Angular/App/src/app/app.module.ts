@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatProgressSpinnerModule, MatCardModule, MatInputModule, MatOptionModule, MatSelectModule } from '@angular/material';
+import { MatProgressSpinnerModule, MatCardModule, MatInputModule, MatOptionModule, MatSelectModule, MatSnackBarModule } from '@angular/material';
 
 import { UiModule } from './ui/ui.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -52,7 +52,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatOptionModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
