@@ -18,6 +18,7 @@ export class InsertDataComponent implements OnInit {
   form: FormGroup;
   isSubmitting: boolean;
   durationInSeconds: number;
+  isLanguageInvalid: boolean;
 
   constructor(
     private builder: FormBuilder,
@@ -28,6 +29,7 @@ export class InsertDataComponent implements OnInit {
 
     this.isSubmitting = false;
     this.durationInSeconds = 5000;
+    this.isLanguageInvalid = false;
   }
 
   ngOnInit() {
@@ -42,12 +44,14 @@ export class InsertDataComponent implements OnInit {
       syllabusFile: [''],
       testPlanFile: [''],
       activeDate: ['', Validators.required],
-      language: ['']
+      language: ['', Validators.required]
     });
   }
 
   onLanguageChange(event){
+    this.form.get('language').markAsTouched();
     if(event.checked){
+      this.isLanguageInvalid = false;
       if(this.form.get('language').value == ''){
         this.form.get('language').patchValue(`${event.source.value}`);
       }
@@ -57,14 +61,15 @@ export class InsertDataComponent implements OnInit {
     }
     else{
       this.form.get('language').patchValue(this.form.get('language').value.replace(`, ${event.source.value}`, '').replace(event.source.value, ''));
+      if(this.form.get('language').value == '') this.isLanguageInvalid = true;
     }
   }
 
   onSubmit(): void {
-    if (this.form.valid && !this.isSubmitting) {
+    if (this.form.valid && !this.isSubmitting && !this.isLanguageInvalid) {
       this.isSubmitting = true;
       let formData = new FormData();
-      
+
       formData.append('Trade', this.form.get('trade').value);
       formData.append('Level', this.form.get('level').value);
       formData.append('Language', this.form.get('language').value);
@@ -72,6 +77,12 @@ export class InsertDataComponent implements OnInit {
       formData.append('DevOfficer', this.form.get('devOfficer').value);
       formData.append('Manager', this.form.get('manager').value);
       formData.append('ActiveDate', this.form.get('activeDate').value);
+      if((<HTMLInputElement>document.getElementById('syllabusFile')).files.length > 0){
+        formData.append('SyllabusFile', (<HTMLInputElement>document.getElementById('syllabusFile')).files[0]);
+      }
+      if((<HTMLInputElement>document.getElementById('testPlanFile')).files.length > 0){
+        formData.append('TestPlanFile', (<HTMLInputElement>document.getElementById('testPlanFile')).files[0]);
+      }
 
       this.service.savePlan(formData).subscribe(
         result => {
@@ -95,6 +106,9 @@ export class InsertDataComponent implements OnInit {
           this.isSubmitting = false;
         }
       );
+    }
+    else{
+      this.form.markAllAsTouched();
     }
   }
 }

@@ -30,13 +30,15 @@
                 </mat-form-field>
               </div>
               <div class="col-lg-3">
-                <mat-label>Language</mat-label><br>
-                <mat-checkbox (change)='onLanguageChange($event)' value='EN'>English</mat-checkbox><br>
-                <mat-checkbox (change)='onLanguageChange($event)' value='CH'>Chinese</mat-checkbox><br>
-                <mat-checkbox (change)='onLanguageChange($event)' value='TH'>Thai</mat-checkbox><br>
-                <mat-checkbox (change)='onLanguageChange($event)' value='TM'>Tamil</mat-checkbox><br>
-                <mat-checkbox (change)='onLanguageChange($event)' value='KR'>Korean</mat-checkbox><br>
-                <mat-checkbox (change)='onLanguageChange($event)' value='BR'>Burmese</mat-checkbox><br>
+                  Language<br>
+                  <mat-checkbox (change)='onLanguageChange($event)' value='EN'>English</mat-checkbox><br>
+                  <mat-checkbox (change)='onLanguageChange($event)' value='CH'>Chinese</mat-checkbox><br>
+                  <mat-checkbox (change)='onLanguageChange($event)' value='TH'>Thai</mat-checkbox><br>
+                  <mat-checkbox (change)='onLanguageChange($event)' value='TM'>Tamil</mat-checkbox><br>
+                  <mat-checkbox (change)='onLanguageChange($event)' value='KR'>Korean</mat-checkbox><br>
+                  <mat-checkbox (change)='onLanguageChange($event)' value='BR'>Burmese</mat-checkbox><br>
+                  <mat-error *ngIf="form.get('language').valid || !form.get('language').touched">&nbsp;</mat-error>
+                  <mat-error *ngIf="form.get('language').invalid && form.get('language').touched">Language must be selected</mat-error>
               </div>
             </div>
             <br />

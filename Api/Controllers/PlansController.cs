@@ -36,33 +36,34 @@ namespace Api.Controllers
         [Route("save")]
         public async Task<IActionResult> SavePlan([FromForm] SavePlanDto dto)
         {
-            //var dir = Path.Combine(webHostEnvironment.WebRootPath, "files");
+            var dir = Path.Combine(webHostEnvironment.WebRootPath, "files");
 
-            //var model = new Plans
-            //{
-            //    Trade = dto.Trade,
-            //    Level = dto.Level,
-            //    Language = dto.Language,
-            //    SyllabusName = dto.SyllabusName,
-            //    DevOfficer = dto.DevOfficer,
-            //    Manager = dto.Manager
-            //};
+            var model = new Plans
+            {
+                Trade = dto.Trade,
+                Level = dto.Level,
+                Language = dto.Language,
+                SyllabusName = dto.SyllabusName,
+                DevOfficer = dto.DevOfficer,
+                Manager = dto.Manager,
+                ActiveDate = dto.ActiveDate
+            };
 
-            //if(dto.SyllabusFile != null)
-            //{
-            //    var fileName = $"{Guid.NewGuid().ToString("N")}_{dto.SyllabusFile.FileName}";
-            //    await dto.SyllabusFile.CopyToAsync(new FileStream(Path.Combine(dir, fileName), FileMode.Create));
-            //    model.SyllabusFile = fileName;
-            //}
-            //if (dto.TestPlanFile != null)
-            //{
-            //    var fileName = $"{Guid.NewGuid().ToString("N")}_{dto.TestPlanFile.FileName}";
-            //    await dto.TestPlanFile.CopyToAsync(new FileStream(Path.Combine(dir, fileName), FileMode.Create));
-            //    model.TestPlanFile = fileName;
-            //}
+            if (dto.SyllabusFile != null)
+            {
+                var fileName = $"{Guid.NewGuid().ToString("N")}_{dto.SyllabusFile.FileName}";
+                await dto.SyllabusFile.CopyToAsync(new FileStream(Path.Combine(dir, fileName), FileMode.Create));
+                model.SyllabusFile = fileName;
+            }
+            if (dto.TestPlanFile != null)
+            {
+                var fileName = $"{Guid.NewGuid().ToString("N")}_{dto.TestPlanFile.FileName}";
+                await dto.TestPlanFile.CopyToAsync(new FileStream(Path.Combine(dir, fileName), FileMode.Create));
+                model.TestPlanFile = fileName;
+            }
 
-            //await unitOfWork.PlanRepository.AddAsync(model);
-            //await unitOfWork.SaveChangesAsync();
+            await unitOfWork.PlanRepository.AddAsync(model);
+            await unitOfWork.SaveChangesAsync();
 
             return Ok();
         }
