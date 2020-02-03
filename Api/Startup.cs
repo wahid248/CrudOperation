@@ -45,9 +45,9 @@ namespace Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("AppCorsPolicy");
             app.UseStaticFiles();
             app.UseRouting();
-            app.UseCors("AppCorsPolicy");
             
             app.UseEndpoints(endpoints =>
             {

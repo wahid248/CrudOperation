@@ -23,8 +23,8 @@
                 <td data-column="Syllabus">{{plan.SyllabusName}}</td>
                 <td data-column="Trade">{{plan.Trade}}</td>
                 <td data-column="Level">{{plan.Level}}</td>
-                <td data-column="Uploaded Syllabus">{{plan.SyllabusFile?.split('_')[1]}}</td>
-                <td data-column="Uploaded Test Plan">{{plan.TestPlanFile?.split('_')[1]}}</td>
+                <td class="file" data-column="Uploaded Syllabus" (click)='downloadFile(plan.SyllabusFile)'>{{plan.SyllabusFile?.split('_')[1]}}</td>
+                <td class="file" data-column="Uploaded Test Plan" (click)='downloadFile(plan.TestPlanFile)'>{{plan.TestPlanFile?.split('_')[1]}}</td>
                 <td data-column="Languages">{{plan.Language}}</td>
                 <td data-column="Development Officer">{{plan.DevOfficer}}</td>
                 <td data-column="Manager">{{plan.Manager}}</td>

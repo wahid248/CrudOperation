@@ -1,6 +1,8 @@
 @import 'https://fonts.googleapis.com/css?family=Open+Sans:600,700';
 
-* {font-family: 'Open Sans', sans-serif;}
+* {
+  font-family: 'Open Sans', sans-serif;
+}
 
 .rwd-table {
   width: 100%;
@@ -8,8 +10,8 @@
   cursor: default;
 }
 
-th{
-    text-align: center;
+th {
+  text-align: center;
 }
 
 .rwd-table thead tr:first-child {
@@ -44,6 +46,8 @@ th{
   margin-bottom: .5em;
 }
 
+
+
 .rwd-table td:before {
   content: attr(data-th);
   font-weight: bold;
@@ -69,31 +73,44 @@ th{
 .rwd-table td {
   padding: .5em 1em;
 }
+
 @media screen and (max-width: 601px) {
   .rwd-table tr:nth-child(2) {
     border-top: none;
   }
 }
+
 @media screen and (min-width: 600px) {
   .rwd-table tr:hover {
     background-color: #d8e7f3;
   }
+
+  .rwd-table td.file:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+  }
+
   .rwd-table td:before {
     display: none;
   }
+
   .rwd-table th,
   .rwd-table td {
     display: table-cell;
     padding: .25em .5em;
   }
+
   .rwd-table th:first-child,
   .rwd-table td:first-child {
     padding-left: 0;
   }
+
   .rwd-table th:last-child,
   .rwd-table td:last-child {
     padding-right: 0;
   }
+
   .rwd-table th,
   .rwd-table td {
     padding: 1em !important;
@@ -105,19 +122,22 @@ th{
 
 /* Basic Styling */
 body {
-background: #4B79A1;
-background: -webkit-linear-gradient(to left, #4B79A1 , #283E51);
-background: linear-gradient(to left, #4B79A1 , #283E51);        
+  background: #4B79A1;
+  background: -webkit-linear-gradient(to left, #4B79A1, #283E51);
+  background: linear-gradient(to left, #4B79A1, #283E51);
 }
+
 h1 {
   text-align: center;
   font-size: 2.4em;
   color: #f2f2f2;
 }
+
 .container {
   display: block;
   text-align: center;
 }
+
 h3 {
   display: inline-block;
   position: relative;
@@ -125,6 +145,7 @@ h3 {
   font-size: 1.5em;
   color: #cecece;
 }
+
 h3:before {
   content: "\25C0";
   position: absolute;
@@ -132,6 +153,7 @@ h3:before {
   -webkit-animation: leftRight 2s linear infinite;
   animation: leftRight 2s linear infinite;
 }
+
 h3:after {
   content: "\25b6";
   position: absolute;
@@ -139,15 +161,39 @@ h3:after {
   -webkit-animation: leftRight 2s linear infinite reverse;
   animation: leftRight 2s linear infinite reverse;
 }
+
 @-webkit-keyframes leftRight {
-  0%    { -webkit-transform: translateX(0)}
-  25%   { -webkit-transform: translateX(-10px)}
-  75%   { -webkit-transform: translateX(10px)}
-  100%  { -webkit-transform: translateX(0)}
+  0% {
+    -webkit-transform: translateX(0)
+  }
+
+  25% {
+    -webkit-transform: translateX(-10px)
+  }
+
+  75% {
+    -webkit-transform: translateX(10px)
+  }
+
+  100% {
+    -webkit-transform: translateX(0)
+  }
 }
+
 @keyframes leftRight {
-  0%    { transform: translateX(0)}
-  25%   { transform: translateX(-10px)}
-  75%   { transform: translateX(10px)}
-  100%  { transform: translateX(0)}
+  0% {
+    transform: translateX(0)
+  }
+
+  25% {
+    transform: translateX(-10px)
+  }
+
+  75% {
+    transform: translateX(10px)
+  }
+
+  100% {
+    transform: translateX(0)
+  }
 }
