@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using Core.Abstruct.Base;
 using Data.Base;
 using Microsoft.AspNetCore.Builder;
@@ -7,7 +5,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
 namespace Api
@@ -48,10 +45,10 @@ namespace Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseCors("AppCorsPolicy");
-            app.UseStaticFiles();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
