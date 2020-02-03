@@ -1,3 +1,5 @@
+import { ViewDataComponent } from './view-data/view-data.component';
+import { InsertDataComponent } from './insert-data/insert-data.component';
 import { DataShareService } from './common/services/data-share.service';
 import { PageNotFoundComponent } from './ui/page-not-found/page-not-found.component';
 import { NgModule } from '@angular/core';
@@ -5,6 +7,8 @@ import { Routes, RouterModule, Router, Event, NavigationStart, NavigationEnd } f
 
 
 const routes: Routes = [
+  { path: 'insert', component: InsertDataComponent },
+  { path: 'view', component: ViewDataComponent },
   { path: '', redirectTo: '/insert', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

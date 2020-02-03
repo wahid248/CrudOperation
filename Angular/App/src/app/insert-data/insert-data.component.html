@@ -1,0 +1,93 @@
+<div class="container-fluid" @fadeIn>
+  <div class="row">
+    <div class="col-lg-12">
+      <mat-card>
+        <mat-card-title>Insert Plan Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-card-title>
+        <mat-card-content>
+          <form [formGroup]='form' (ngSubmit)='onSubmit()' enctype="multipart/form-data">
+            <div class="row">
+              <div class="col-lg-3">
+                <mat-form-field>
+                  <mat-label>Select Trade</mat-label>
+                  <mat-select formControlName='trade'>
+                    <mat-option value="Asphalt Concrete Paving">Asphalt Concrete Paving</mat-option>
+                    <mat-option value="Bulldozer Operation">Bulldozer Operation</mat-option>
+                    <mat-option value="Bricklaying">Bricklaying</mat-option>
+                    <mat-option value="Bored Micro-Piling Operation">Bored Micro-Piling Operation</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="form.get('trade').invalid">Select Trade</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-3">
+                <mat-form-field>
+                  <mat-label>Select Level</mat-label>
+                  <mat-select formControlName='level'>
+                    <mat-option value="SATW">SATW</mat-option>
+                    <mat-option value="SEC(K)">SEC(K)</mat-option>
+                    <mat-option value="SATF">SATF</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="form.get('level').invalid">Select Level</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-3">
+                <mat-label>Language</mat-label><br>
+                <mat-checkbox>English</mat-checkbox><br>
+                <mat-checkbox>Chinese</mat-checkbox><br>
+                <mat-checkbox>Thai</mat-checkbox><br>
+                <mat-checkbox>Tamil</mat-checkbox><br>
+                <mat-checkbox>Korean</mat-checkbox><br>
+                <mat-checkbox>Burmese</mat-checkbox><br>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-lg-3">
+                <mat-form-field>
+                  <input matInput placeholder="Syllabus Name" formControlName='syllabusName'>
+                  <mat-error *ngIf="form.get('syllabusName').invalid">Syllabus Name is required</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-3">
+                <mat-form-field>
+                  <input matInput placeholder="Development Officer" formControlName='devOfficer'>
+                  <mat-error *ngIf="form.get('devOfficer').invalid">Development Officer is required</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-3">
+                <mat-form-field>
+                  <input matInput placeholder="Manager" formControlName='manager'>
+                  <mat-error *ngIf="form.get('manager').invalid">Manager is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <label for='syllabusFile' class="mat-raised-button mat-primary">Upload Syllabus</label>
+                <input class="mat-raised-button mat-primary" formControlName='syllabusFile' id="syllabusFile"
+                  type="file" />&nbsp;&nbsp;&nbsp;&nbsp;
+                <span><b>{{form.get('syllabusFile').value.substring('fakepath').split('\\')[2]}}</b></span>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-12">
+                <label for='testPlanFile' class="mat-raised-button mat-primary">Upload Test Plan</label>
+                <input class="mat-raised-button mat-primary" formControlName='testPlanFile' id="testPlanFile"
+                  type="file" />&nbsp;&nbsp;&nbsp;&nbsp;
+                <span><b>{{form.get('testPlanFile').value.substring('fakepath').split('\\')[2]}}</b></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <button type="submit" class="action-button" mat-raised-button color="primary" style="float: right;">
+                  <span *ngIf='!isSubmitting'>Save</span>
+                  <mat-spinner diameter='25' *ngIf='isSubmitting' class="button-spinner"></mat-spinner>
+                </button>
+              </div>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
