@@ -3,9 +3,9 @@ export class Plan{
     Level: string;
     Language: string;
     SyllabusName: string;
-    SyllabusFile: File;
-    TestPlanFile: File;
+    SyllabusFile: string;
+    TestPlanFile: string;
     DevOfficer: string;
     Manager: string;
-    ActiveDate: string;
+    ActiveDate: Date;
 }

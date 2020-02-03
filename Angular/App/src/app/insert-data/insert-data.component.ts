@@ -1,5 +1,4 @@
 import { PlanService } from './../common/services/plan.service';
-import { Plan } from './../common/models/plan';
 import { DataShareService } from './../common/services/data-share.service';
 import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';

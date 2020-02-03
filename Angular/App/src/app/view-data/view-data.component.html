@@ -1,1 +1,39 @@
-<p>view-data works!</p>
+<div class="container-fluid" @fadeIn>
+  <div class="row">
+    <div class="col-lg-12">
+      <mat-card>
+        <mat-card-title>Plan Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-card-title>
+        <mat-card-content>
+          <table class="rwd-table">
+            <thead>
+              <tr>
+                <th>Syllabus</th>
+                <th>Trade</th>
+                <th>Level</th>
+                <th>Uploaded Syllabus</th>
+                <th>Uploaded Test Plan</th>
+                <th>Languages</th>
+                <th>Development Officer</th>
+                <th>Manager</th>
+                <th>Active Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let plan of plans'>
+                <td data-column="Syllabus">{{plan.SyllabusName}}</td>
+                <td data-column="Trade">{{plan.Trade}}</td>
+                <td data-column="Level">{{plan.Level}}</td>
+                <td data-column="Uploaded Syllabus">{{plan.SyllabusFile?.split('_')[1]}}</td>
+                <td data-column="Uploaded Test Plan">{{plan.TestPlanFile?.split('_')[1]}}</td>
+                <td data-column="Languages">{{plan.Language}}</td>
+                <td data-column="Development Officer">{{plan.DevOfficer}}</td>
+                <td data-column="Manager">{{plan.Manager}}</td>
+                <td data-column="Active Date">{{plan.ActiveDate?.split('T')[0]}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

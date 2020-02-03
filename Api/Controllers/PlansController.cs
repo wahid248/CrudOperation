@@ -9,6 +9,7 @@ using Core.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Api.Controllers
 {
@@ -27,9 +28,9 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("get")]
-        public IActionResult GetPlan()
+        public async Task<IActionResult> GetPlan(int rowsPerPage = 10, int pageNumber = 1)
         {
-            return Ok();
+            return Content(JsonConvert.SerializeObject(await unitOfWork.PlanRepository.GetAllPlans(rowsPerPage, pageNumber)));
         }
 
         [HttpPost]
