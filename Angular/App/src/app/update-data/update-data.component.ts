@@ -58,4 +58,8 @@ export class UpdateDataComponent implements OnInit {
       if(this.form.get('language').value == '') this.isLanguageInvalid = true;
     }
   }
+
+  onSubmit(){
+    
+  }
 }
