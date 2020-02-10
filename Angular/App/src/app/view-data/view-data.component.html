@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-12">
       <mat-card>
-        <mat-card-title>Plan Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</mat-card-title>
+        <mat-card-title>Plan Details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<mat-spinner diameter='25' *ngIf='isLoading'></mat-spinner></mat-card-title>
         <mat-card-content>
           <table class="rwd-table">
             <thead>
@@ -16,6 +16,7 @@
                 <th>Development Officer</th>
                 <th>Manager</th>
                 <th>Active Date</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -23,12 +24,22 @@
                 <td data-column="Syllabus">{{plan.SyllabusName}}</td>
                 <td data-column="Trade">{{plan.Trade}}</td>
                 <td data-column="Level">{{plan.Level}}</td>
-                <td class="file" data-column="Uploaded Syllabus" (click)='downloadFile(plan.SyllabusFile)'>{{plan.SyllabusFile?.split('_')[1]}}</td>
-                <td class="file" data-column="Uploaded Test Plan" (click)='downloadFile(plan.TestPlanFile)'>{{plan.TestPlanFile?.split('_')[1]}}</td>
+                <td class="file" data-column="Uploaded Syllabus" (click)='downloadFile(plan.SyllabusFile)'>
+                  {{plan.SyllabusFile?.split('_')[1]}}</td>
+                <td class="file" data-column="Uploaded Test Plan" (click)='downloadFile(plan.TestPlanFile)'>
+                  {{plan.TestPlanFile?.split('_')[1]}}</td>
                 <td data-column="Languages">{{plan.Language}}</td>
                 <td data-column="Development Officer">{{plan.DevOfficer}}</td>
                 <td data-column="Manager">{{plan.Manager}}</td>
-                <td data-column="Active Date">{{plan.ActiveDate?.split('T')[0]}}</td>
+                <td data-column="Active Date">{{plan.ActiveDate?.split('T')[0] | date: 'dd/MM/yyyy'}}</td>
+                <td style="display: flex;">
+                  <button mat-icon-button color="primary" matTooltip="Edit record" data-id={{plan.Id}} (click)="openUpdatetDialog($event)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button color="warn" matTooltip="Delete record" data-id={{plan.Id}} (click)="onDelete($event)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>

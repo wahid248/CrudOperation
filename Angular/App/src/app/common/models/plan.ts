@@ -1,4 +1,5 @@
 export class Plan{
+    Id: number;
     Trade: string;
     Level: string;
     Language: string;

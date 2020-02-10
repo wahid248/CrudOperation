@@ -23,6 +23,7 @@ namespace Data.Repositories
                 .Take(rowsPerPage)
                 .Select(x => new GetPlansDto
                 {
+                    Id = x.Id,
                     Trade = x.Trade,
                     Level = x.Level,
                     Language = x.Language,

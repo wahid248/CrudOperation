@@ -23,4 +23,9 @@ export class PlanService extends BaseService {
     return this.client.get<Plan[]>(`${this.baseUrl}/plans/get?rowsPerPage=${rowsPerPage}&pageNumber=${pageNumber}`)
       .pipe(catchError(this.handleError));
   }
+
+  deletePlan(id: number): Observable<any[]> {
+    return this.client.delete<any>(`${this.baseUrl}/plans/delete/${id}`)
+      .pipe(catchError(this.handleError));
+  }
 }
