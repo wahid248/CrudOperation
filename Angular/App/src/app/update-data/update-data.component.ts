@@ -3,7 +3,7 @@ import { PlanService } from './../common/services/plan.service';
 import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-update-data',
@@ -21,6 +21,7 @@ export class UpdateDataComponent implements OnInit {
     private builder: FormBuilder,
     private service: PlanService,
     private snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<UpdateDataComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Plan)
   {
     this.isSubmitting = false;
@@ -60,6 +61,51 @@ export class UpdateDataComponent implements OnInit {
   }
 
   onSubmit(){
-    
+    if (this.form.valid && !this.isSubmitting && !this.isLanguageInvalid) {
+      this.isSubmitting = true;
+      let formData = new FormData();
+
+      formData.append('Id', this.data.Id.toString());
+      formData.append('Trade', this.form.get('trade').value);
+      formData.append('Level', this.form.get('level').value);
+      formData.append('Language', this.form.get('language').value);
+      formData.append('SyllabusName', this.form.get('syllabusName').value);
+      formData.append('DevOfficer', this.form.get('devOfficer').value);
+      formData.append('Manager', this.form.get('manager').value);
+      formData.append('ActiveDate', this.form.get('activeDate').value);
+      if((<HTMLInputElement>document.getElementById('syllabusFile')).files.length > 0){
+        formData.append('SyllabusFile', (<HTMLInputElement>document.getElementById('syllabusFile')).files[0]);
+      }
+      if((<HTMLInputElement>document.getElementById('testPlanFile')).files.length > 0){
+        formData.append('TestPlanFile', (<HTMLInputElement>document.getElementById('testPlanFile')).files[0]);
+      }
+
+      this.service.updatePlan(formData).subscribe(
+        result => {
+          // result is null because of cors
+          this.snackBar.open("Data saved successfully", '', {
+            duration: this.durationInSeconds,
+            horizontalPosition: "end",
+            verticalPosition: "top",
+            panelClass: ['snackbar-success']
+          });
+          this.isSubmitting = false;
+          this.dialogRef.close();
+        },
+        error => {
+          this.snackBar.open(error, '', {
+            duration: this.durationInSeconds,
+            horizontalPosition: "end",
+            verticalPosition: "top",
+            panelClass: ['snackbar-error']
+          });
+          console.error(error);
+          this.isSubmitting = false;
+        }
+      );
+    }
+    else{
+      this.form.markAllAsTouched();
+    }
   }
 }

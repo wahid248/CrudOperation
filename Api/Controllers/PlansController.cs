@@ -101,7 +101,7 @@ namespace Api.Controllers
                 await dto.SyllabusFile.CopyToAsync(new FileStream(Path.Combine(dir, fileName), FileMode.Create));
 
                 //delete old file
-                if (System.IO.File.Exists(Path.Combine(dir, oldPlan.SyllabusFile))) System.IO.File.Delete(Path.Combine(dir, oldPlan.SyllabusFile));
+                if (!string.IsNullOrEmpty(oldPlan.SyllabusFile) && System.IO.File.Exists(Path.Combine(dir, oldPlan.SyllabusFile))) System.IO.File.Delete(Path.Combine(dir, oldPlan.SyllabusFile));
 
                 //save new filename
                 oldPlan.SyllabusFile = fileName;
@@ -113,7 +113,7 @@ namespace Api.Controllers
                 await dto.TestPlanFile.CopyToAsync(new FileStream(Path.Combine(dir, fileName), FileMode.Create));
 
                 //delete old file
-                if (System.IO.File.Exists(Path.Combine(dir, oldPlan.TestPlanFile))) System.IO.File.Delete(Path.Combine(dir, oldPlan.TestPlanFile));
+                if (!string.IsNullOrEmpty(oldPlan.TestPlanFile) && System.IO.File.Exists(Path.Combine(dir, oldPlan.TestPlanFile))) System.IO.File.Delete(Path.Combine(dir, oldPlan.TestPlanFile));
 
                 //save new filename
                 oldPlan.TestPlanFile = fileName;

@@ -29,11 +29,12 @@ export class InsertDataComponent implements OnInit {
     this.isSubmitting = false;
     this.durationInSeconds = 5000;
     this.isLanguageInvalid = false;
+
+    this.titleService.setTitle('Insert Data | Crud Operations');
+    this.dataShareService.changeHeaderTitle('Insert Data');
   }
 
   ngOnInit() {
-    this.titleService.setTitle('Insert Data | Crud Operations');
-    this.dataShareService.changeHeaderTitle('Insert Data');
     this.form = this.builder.group({
       trade: ['Asphalt Concrete Paving', Validators.required],
       level: ['SATW', Validators.required],

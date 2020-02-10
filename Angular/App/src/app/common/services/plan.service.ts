@@ -19,6 +19,11 @@ export class PlanService extends BaseService {
       .pipe(catchError(this.handleError));
   }
 
+  updatePlan(form: FormData): Observable<any> {
+    return this.client.put<any>(`${this.baseUrl}/plans/update`, form)
+      .pipe(catchError(this.handleError));
+  }
+
   getPlans(rowsPerPage: number, pageNumber: number): Observable<Plan[]> {
     return this.client.get<Plan[]>(`${this.baseUrl}/plans/get?rowsPerPage=${rowsPerPage}&pageNumber=${pageNumber}`)
       .pipe(catchError(this.handleError));

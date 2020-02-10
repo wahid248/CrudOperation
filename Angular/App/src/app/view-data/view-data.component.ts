@@ -37,11 +37,12 @@ export class ViewDataComponent implements OnInit {
     this.isLoading = false;
     this.rowsPerPage = 10;
     this.pageNumber = 1;
+
+    this.dataShareService.changeHeaderTitle('View Data');
+    this.titleService.setTitle('View Data | Crud Operations');
   }
 
   ngOnInit() {
-    this.titleService.setTitle('View Data | Crud Operations');
-    this.dataShareService.changeHeaderTitle('View Data');
     this.loadTable(this.rowsPerPage, this.pageNumber);
   }
 
